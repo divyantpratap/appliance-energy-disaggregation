@@ -23,3 +23,4 @@ figures:
 
 lint:
 	.venv/bin/ruff check src tests
+	.venv/bin/ruff format --check src tests

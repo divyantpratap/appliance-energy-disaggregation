@@ -42,8 +42,8 @@ seq2point CNN (PyTorch) per appliance is compared against FHMM / combinatorial o
 ## Reproduce
 
 ```bash
-git clone https://github.com/divyantpratap/01-nilm-energy-disaggregation.git
-cd 01-nilm-energy-disaggregation
+git clone https://github.com/divyantpratap/appliance-energy-disaggregation.git
+cd appliance-energy-disaggregation
 make setup
 make data    # downloads into data/raw (not committed)
 make run     # train + evaluate + figures
@@ -53,7 +53,7 @@ make test
 ## Project structure
 
 ```
-01-nilm-energy-disaggregation/
+appliance-energy-disaggregation/
 ├── README.md
 ├── Makefile
 ├── requirements.txt

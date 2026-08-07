@@ -1,4 +1,5 @@
 """Figure generation for README assets."""
+
 from __future__ import annotations
 
 from pathlib import Path

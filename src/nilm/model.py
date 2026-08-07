@@ -1,8 +1,8 @@
 """Baseline + main model training entrypoint."""
+
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import numpy as np
 from sklearn.linear_model import LinearRegression, LogisticRegression
@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 
 from .config import ASSETS_DIR, SEED
 from .data import load_sample, validate
-from .evaluate import regression_report, classification_report
+from .evaluate import classification_report, regression_report
 from .features import build_features
 
 
@@ -32,9 +32,7 @@ def train() -> dict:
         # synthetic target from first column for smoke training
         y = X[:, 0] + rng.normal(0, 0.1, size=len(X))
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.25, random_state=SEED
-    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=SEED)
     if _is_classification(y_train):
         model = LogisticRegression(max_iter=500, random_state=SEED)
         model.fit(X_train, y_train)
@@ -49,13 +47,13 @@ def train() -> dict:
         kind = "regression"
 
     payload = {
-        "project": "01-nilm-energy-disaggregation",
+        "project": "appliance-energy-disaggregation",
         "task": kind,
         "baseline": "sklearn linear/logistic smoke baseline",
         "main_planned": "seq2point CNN (PyTorch) per appliance",
         "metrics": metrics,
-        "n_train": int(len(X_train)),
-        "n_test": int(len(X_test)),
+        "n_train": len(X_train),
+        "n_test": len(X_test),
         "note": "Replace with the full pipeline described in the README.",
     }
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)

@@ -1,7 +1,8 @@
 """Shared portfolio chart theme (vendored from energy-viz-lab)."""
+
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt

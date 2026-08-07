@@ -1,9 +1,10 @@
 """Load and validate datasets (sample by default)."""
+
 from __future__ import annotations
 
 import pandas as pd
 
-from .config import SAMPLE_DIR, SEED
+from .config import SAMPLE_DIR
 
 
 def load_sample() -> pd.DataFrame:
