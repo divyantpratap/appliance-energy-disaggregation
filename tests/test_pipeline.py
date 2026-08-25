@@ -7,6 +7,7 @@ from nilm.data import load_sample, validate
 from nilm.evaluate import classification_report, regression_report
 from nilm.features import build_features
 from nilm.model import train
+from nilm.demo import APPLIANCES, energy_kwh, estimate_appliances, mae_by_appliance, simulate_household
 from nilm.viz import make_hero
 
 
@@ -49,3 +50,12 @@ def test_hero_figure(tmp_path):
 
 def test_seed_constant():
     assert SEED == 42
+
+
+def test_demo_disaggregation_is_deterministic_and_finite():
+    actual = simulate_household()
+    predicted = estimate_appliances(actual)
+    assert len(actual) == 24 * 60
+    assert list(predicted.columns)[1:] == list(APPLIANCES)
+    assert np.isfinite(mae_by_appliance(actual, predicted)).all()
+    assert (energy_kwh(actual) >= 0).all()
